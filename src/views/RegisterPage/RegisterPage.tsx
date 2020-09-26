@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import FormInput from '../../components/FormInput/FormInput';
+import Button from '../../components/Button/Button';
 
 const RegisterPage: React.FC = (props) => {
     const [user, setUser] = useState({
@@ -47,6 +48,7 @@ const RegisterPage: React.FC = (props) => {
                     name="email"
                     placeholder="Email"
                     value={email}
+                    type="email"
                     onChange={onChange}
                     disabled={false}
                 />
@@ -56,6 +58,7 @@ const RegisterPage: React.FC = (props) => {
                     name="password"
                     placeholder="Password"
                     value={password}
+                    type="password"
                     onChange={onChange}
                     disabled={false}
                 />
@@ -65,10 +68,11 @@ const RegisterPage: React.FC = (props) => {
                     name="passwordConfirm"
                     placeholder="Password Confirm"
                     value={passwordConfirm}
+                    type="password"
                     onChange={onChange}
                     disabled={false}
                 />
-                <Button variant="primary" type="submit">
+                <Button type="submit" size="lg" disabled={false}>
                     Sign Up
                 </Button>
             </Form>
