@@ -1,27 +1,42 @@
 import React from 'react';
 import PropTypes, { InferProps } from 'prop-types';
+import { createUseStyles } from 'react-jss';
+import classNames from 'classnames';
 import Button from 'react-bootstrap/esm/Button';
+import styles from '../../assets/jss/components/buttonStyles.jss';
+
+const useStyles = createUseStyles(styles);
 
 type CustomButtonProps = {
     children: React.ReactNode;
     type?: string;
     href?: string;
-    size: 'sm' | 'lg' | undefined;
-    disabled: boolean;
+    size?: 'sm' | 'lg';
+    disabled?: boolean;
+    fullWidth?: boolean;
+    color?: 'red' | 'green' | 'blue';
 };
 
 type InferredProps = InferProps<typeof CustomButton.propTypes>;
 
 const defaultProps = {
-    type: '',
+    type: 'button',
     href: '#',
-    size: undefined,
+    size: 'sm' as 'sm' | 'lg',
+    disabled: false,
+    fullWidth: false,
+    color: 'blue' as 'red' | 'green' | 'blue',
 };
 
 const CustomButton: React.FC<CustomButtonProps> = (props: InferredProps & CustomButtonProps) => {
-    const { children, type, href, size, disabled } = props;
+    const classes = useStyles();
+    const { children, type, href, size, disabled, fullWidth, color = 'blue' } = props;
+    const buttonClasses = classNames({
+        [classes.fullWidth]: fullWidth,
+        [classes[color]]: color,
+    });
     return (
-        <Button type={type} href={href} size={size} disabled={disabled}>
+        <Button className={buttonClasses} type={type} href={href} size={size} disabled={disabled}>
             {children}
         </Button>
     );
@@ -34,7 +49,9 @@ CustomButton.propTypes = {
     type: PropTypes.string,
     href: PropTypes.string,
     size: PropTypes.oneOf(['sm', 'lg', undefined]),
-    disabled: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool,
+    fullWidth: PropTypes.bool,
+    color: PropTypes.oneOf(['blue', 'red', 'green']),
 };
 
 export default CustomButton;
