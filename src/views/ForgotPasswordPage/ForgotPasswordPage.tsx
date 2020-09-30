@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Col, Container, Form, Nav, Row } from 'react-bootstrap';
 import { createUseStyles } from 'react-jss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/Card/CardHeader';
 import CardFooter from '../../components/Card/CardFooter';
@@ -10,14 +12,16 @@ import FormInput from '../../components/FormInput/FormInput';
 import Button from '../../components/Button/Button';
 import styles from '../../assets/jss/views/registerLoginPageStyles.jss';
 
+library.add(faEnvelope);
+
 const useStyles = createUseStyles(styles);
 
 const ForgotPasswordPage: React.FunctionComponent = (props) => {
     const classes = useStyles();
 
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState<string>('');
 
-    const [emailError, setEmailError] = useState('');
+    const [emailError, setEmailError] = useState<string>('');
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const { name } = event.target;
@@ -43,11 +47,12 @@ const ForgotPasswordPage: React.FunctionComponent = (props) => {
                                     type="email"
                                     onChange={onChange}
                                     disabled={false}
+                                    icon={<FontAwesomeIcon icon={faEnvelope} size="lg" />}
                                     isValid={!emailError && !!email}
                                     isInvalid={!!emailError}
                                     error={emailError}
                                 />
-                                <Button type="submit" size="sm" disabled={false} fullWidth color="blue">
+                                <Button type="submit" size="sm" disabled={false} fullWidth color="blue" rounded>
                                     Send password reset email
                                 </Button>
                             </Form>
@@ -58,7 +63,5 @@ const ForgotPasswordPage: React.FunctionComponent = (props) => {
         </Container>
     );
 };
-
-ForgotPasswordPage.propTypes = {};
 
 export default ForgotPasswordPage;

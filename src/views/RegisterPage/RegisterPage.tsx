@@ -3,6 +3,9 @@ import PropTypes, { InferProps } from 'prop-types';
 import { Container, Form, Row, Col, Nav } from 'react-bootstrap';
 import { createUseStyles } from 'react-jss';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUserCircle, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import FormInput from '../../components/FormInput/FormInput';
 import Button from '../../components/Button/Button';
 import styles from '../../assets/jss/views/registerLoginPageStyles.jss';
@@ -12,7 +15,22 @@ import Card from '../../components/Card/Card';
 import CardHeader from '../../components/Card/CardHeader';
 import CardFooter from '../../components/Card/CardFooter';
 
+library.add(faUserCircle, faEnvelope, faLock);
 // type RegisterPageProps = {};
+
+type UserState = {
+    username: string;
+    email: string;
+    password: string;
+    passwordConfirm: string;
+};
+
+type ErrorState = {
+    usernameError: string;
+    emailError: string;
+    passwordError: string;
+    passwordConfirmError: string;
+};
 
 const useStyles = createUseStyles(styles);
 
@@ -21,14 +39,14 @@ const useStyles = createUseStyles(styles);
 const RegisterPage: React.FC = (props) => {
     const classes = useStyles();
 
-    const [user, setUser] = useState({
+    const [user, setUser] = useState<UserState>({
         username: '',
         email: '',
         password: '',
         passwordConfirm: '',
     });
 
-    const [error, setError] = useState({
+    const [error, setError] = useState<ErrorState>({
         usernameError: '',
         emailError: '',
         passwordError: '',
@@ -64,6 +82,7 @@ const RegisterPage: React.FC = (props) => {
                                     value={username}
                                     onChange={onChange}
                                     disabled={false}
+                                    icon={<FontAwesomeIcon icon={faUserCircle} size="lg" />}
                                     isValid={!usernameError && !!username}
                                     isInvalid={!!usernameError}
                                     error={usernameError}
@@ -77,6 +96,7 @@ const RegisterPage: React.FC = (props) => {
                                     type="email"
                                     onChange={onChange}
                                     disabled={false}
+                                    icon={<FontAwesomeIcon icon={faEnvelope} size="lg" />}
                                     isValid={!emailError && !!email}
                                     isInvalid={!!emailError}
                                     error={emailError}
@@ -90,6 +110,7 @@ const RegisterPage: React.FC = (props) => {
                                     type="password"
                                     onChange={onChange}
                                     disabled={false}
+                                    icon={<FontAwesomeIcon icon={faLock} size="lg" />}
                                     isValid={!passwordError && !!password}
                                     isInvalid={!!passwordError}
                                     error={passwordError}
@@ -103,11 +124,12 @@ const RegisterPage: React.FC = (props) => {
                                     type="password"
                                     onChange={onChange}
                                     disabled={false}
+                                    icon={<FontAwesomeIcon icon={faLock} size="lg" />}
                                     isValid={!passwordConfirmError && !!passwordConfirm}
                                     isInvalid={!!passwordConfirmError}
                                     error={passwordConfirmError}
                                 />
-                                <Button type="submit" size="sm" disabled={false} fullWidth color="blue">
+                                <Button type="submit" size="sm" disabled={false} fullWidth color="blue" rounded>
                                     Sign Up
                                 </Button>
                             </Form>

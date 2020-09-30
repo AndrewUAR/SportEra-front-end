@@ -1,6 +1,6 @@
 import { defaultFont } from '../sharedSportEraStyles.jss';
 
-const registerPageStyle = () => ({
+const registerPageStyle = {
     pageHeader: {
         height: 'calc(100vh - 9.0625rem)',
         justifyContent: 'center',
@@ -20,7 +20,7 @@ const registerPageStyle = () => ({
     },
     cardTitle: {
         ...defaultFont,
-        fontSize: '1.25rem',
+        fontSize: '1rem',
         fontWeight: '700',
         textTransform: 'uppercase',
         margin: '0 auto',
@@ -71,6 +71,7 @@ const registerPageStyle = () => ({
     },
     forgotResetTitle: {
         '&::before': {
+            minWidth: '14vw',
             '@media (min-width: 768px)': {
                 minWidth: '10vw',
             },
@@ -82,6 +83,7 @@ const registerPageStyle = () => ({
             },
         },
         '&::after': {
+            minWidth: '14vw',
             '@media (min-width: 768px)': {
                 minWidth: '10vw',
             },
@@ -92,7 +94,7 @@ const registerPageStyle = () => ({
                 minWidth: '4vw',
             },
         },
-    }
-});
+    },
+};
 
 export default registerPageStyle;

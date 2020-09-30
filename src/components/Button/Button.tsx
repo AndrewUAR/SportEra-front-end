@@ -15,6 +15,7 @@ type CustomButtonProps = {
     disabled?: boolean;
     fullWidth?: boolean;
     color?: 'red' | 'green' | 'blue';
+    rounded?: boolean;
 };
 
 type InferredProps = InferProps<typeof CustomButton.propTypes>;
@@ -26,14 +27,16 @@ const defaultProps = {
     disabled: false,
     fullWidth: false,
     color: 'blue' as 'red' | 'green' | 'blue',
+    rounded: false,
 };
 
 const CustomButton: React.FC<CustomButtonProps> = (props: InferredProps & CustomButtonProps) => {
     const classes = useStyles();
-    const { children, type, href, size, disabled, fullWidth, color = 'blue' } = props;
+    const { children, type, href, size, disabled, fullWidth, color = 'blue', rounded } = props;
     const buttonClasses = classNames({
         [classes.fullWidth]: fullWidth,
         [classes[color]]: color,
+        [classes.rounded]: rounded,
     });
     return (
         <Button className={buttonClasses} type={type} href={href} size={size} disabled={disabled}>
@@ -52,6 +55,7 @@ CustomButton.propTypes = {
     disabled: PropTypes.bool,
     fullWidth: PropTypes.bool,
     color: PropTypes.oneOf(['blue', 'red', 'green']),
+    rounded: PropTypes.bool,
 };
 
 export default CustomButton;

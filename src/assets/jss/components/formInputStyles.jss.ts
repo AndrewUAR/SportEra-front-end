@@ -1,6 +1,6 @@
-import { defaultFont, hexToRgb, whiteColor } from '../sharedSportEraStyles.jss';
+import { boxShadow, boxShadowLight, defaultFont, hexToRgb, whiteColor } from '../sharedSportEraStyles.jss';
 
-const formInputStyles = () => ({
+const formInputStyles = {
     formGroup: {
         margin: '0',
     },
@@ -24,8 +24,17 @@ const formInputStyles = () => ({
         fontSize: '0.75rem',
         fontWeight: '600',
         color: whiteColor,
-        margin: '0',
+        margin: '0 0 0 0.5rem',
     },
-});
+    inputIcon: {
+        ...boxShadowLight,
+        background: `linear-gradient(to right top, rgba(${hexToRgb('#00c6ff')}, 0.8),
+        rgba(${hexToRgb('#0072ff')}, 0.7))`,
+        margin: '0',
+        padding: '0 0.5rem',
+        border: 'none',
+        color: `rgba(${hexToRgb(whiteColor)}, 0.7)`,
+    },
+};
 
 export default formInputStyles;

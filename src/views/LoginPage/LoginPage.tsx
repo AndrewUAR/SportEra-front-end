@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Col, Container, Form, Nav, Row } from 'react-bootstrap';
 import { createUseStyles } from 'react-jss';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUserCircle, faLock } from '@fortawesome/free-solid-svg-icons';
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/Card/CardHeader';
 import CardFooter from '../../components/Card/CardFooter';
@@ -11,17 +14,29 @@ import FormInput from '../../components/FormInput/FormInput';
 import Button from '../../components/Button/Button';
 import styles from '../../assets/jss/views/registerLoginPageStyles.jss';
 
+library.add(faUserCircle, faLock);
+
 const useStyles = createUseStyles(styles);
+
+type UserState = {
+    username: string;
+    password: string;
+};
+
+type ErrorState = {
+    usernameError: string;
+    passwordError: string;
+};
 
 const LoginPage: React.FunctionComponent = (props) => {
     const classes = useStyles();
 
-    const [user, setUser] = useState({
+    const [user, setUser] = useState<UserState>({
         username: '',
         password: '',
     });
 
-    const [error, setError] = useState({
+    const [error, setError] = useState<ErrorState>({
         usernameError: '',
         passwordError: '',
     });
@@ -56,6 +71,7 @@ const LoginPage: React.FunctionComponent = (props) => {
                                     value={username}
                                     onChange={onChange}
                                     disabled={false}
+                                    icon={<FontAwesomeIcon icon={faUserCircle} size="lg" />}
                                     isValid={!usernameError && !!username}
                                     isInvalid={!!usernameError}
                                     error={usernameError}
@@ -69,11 +85,12 @@ const LoginPage: React.FunctionComponent = (props) => {
                                     type="password"
                                     onChange={onChange}
                                     disabled={false}
+                                    icon={<FontAwesomeIcon icon={faLock} size="lg" />}
                                     isValid={!passwordError && !!password}
                                     isInvalid={!!passwordError}
                                     error={passwordError}
                                 />
-                                <Button type="submit" size="sm" disabled={false} fullWidth color="blue">
+                                <Button type="submit" size="sm" disabled={false} fullWidth color="blue" rounded>
                                     Sign In
                                 </Button>
                             </Form>

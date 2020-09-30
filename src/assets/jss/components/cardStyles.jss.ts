@@ -1,6 +1,6 @@
 import { boxShadowLight, defaultFont, hexToRgb, whiteColor } from '../sharedSportEraStyles.jss';
 
-const cardStyles = () => ({
+const cardStyles = {
     card: {},
     loginRegisterCard: {
         background: `linear-gradient(to right top, rgba(${hexToRgb('#00c6ff')}, 0.6),
@@ -38,6 +38,6 @@ const cardStyles = () => ({
             textTransform: 'uppercase',
         },
     },
-});
+};
 
 export default cardStyles;

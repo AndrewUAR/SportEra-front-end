@@ -1,26 +1,40 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Col, Container, Form, Nav, Row } from 'react-bootstrap';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import { createUseStyles } from 'react-jss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/Card/CardHeader';
-import CardFooter from '../../components/Card/CardFooter';
 import CardBody from '../../components/Card/CardBody';
 import FormInput from '../../components/FormInput/FormInput';
 import Button from '../../components/Button/Button';
 import styles from '../../assets/jss/views/registerLoginPageStyles.jss';
 
+library.add(faLock);
+
 const useStyles = createUseStyles(styles);
 
-const ResetPasswordPage: React.FunctionComponent = (props) => {
+type UserState = {
+    password: string;
+    passwordConfirm: string;
+};
+
+type ErrorState = {
+    passwordError: string;
+    passwordConfirmError: string;
+};
+
+const ResetPasswordPage: React.FC = (props) => {
     const classes = useStyles();
 
-    const [user, setUser] = useState({
+    const [user, setUser] = useState<UserState>({
         password: '',
         passwordConfirm: '',
     });
 
-    const [error, setError] = useState({
+    const [error, setError] = useState<ErrorState>({
         passwordError: '',
         passwordConfirmError: '',
     });
@@ -55,6 +69,7 @@ const ResetPasswordPage: React.FunctionComponent = (props) => {
                                     type="password"
                                     onChange={onChange}
                                     disabled={false}
+                                    icon={<FontAwesomeIcon icon={faLock} size="lg" />}
                                     isValid={!passwordError && !!password}
                                     isInvalid={!!passwordError}
                                     error={passwordError}
@@ -68,11 +83,12 @@ const ResetPasswordPage: React.FunctionComponent = (props) => {
                                     type="password"
                                     onChange={onChange}
                                     disabled={false}
+                                    icon={<FontAwesomeIcon icon={faLock} size="lg" />}
                                     isValid={!passwordConfirmError && !!passwordConfirm}
                                     isInvalid={!!passwordConfirmError}
                                     error={passwordConfirmError}
                                 />
-                                <Button type="submit" size="sm" disabled={false} fullWidth color="blue">
+                                <Button type="submit" size="sm" disabled={false} fullWidth color="blue" rounded>
                                     Reset password
                                 </Button>
                             </Form>

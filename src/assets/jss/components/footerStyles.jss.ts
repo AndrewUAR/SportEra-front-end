@@ -1,6 +1,6 @@
 import { boxShadow, defaultFont, hexToRgb, whiteColor } from '../sharedSportEraStyles.jss';
 
-const footerStyles = () => ({
+const footerStyles = {
     footer: {
         ...boxShadow,
         color: `rgba(${hexToRgb(whiteColor)}, 0.5)` + ' !important',
@@ -64,6 +64,6 @@ const footerStyles = () => ({
             },
         },
     },
-});
+};
 
 export default footerStyles;

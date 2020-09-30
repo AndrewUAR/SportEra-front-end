@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Nav } from 'react-bootstrap';
 import { createUseStyles } from 'react-jss';
 import styles from '../../assets/jss/components/navBarStyles.jss';
@@ -16,7 +15,5 @@ const SignOutLinks: React.FC = (props) => {
         </Nav>
     );
 };
-
-SignOutLinks.propTypes = {};
 
 export default SignOutLinks;

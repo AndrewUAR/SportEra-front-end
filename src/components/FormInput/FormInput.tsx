@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes, { InferProps } from 'prop-types';
-import { Form } from 'react-bootstrap';
+import { Form, InputGroup } from 'react-bootstrap';
 import { createUseStyles } from 'react-jss';
 import styles from '../../assets/jss/components/formInputStyles.jss';
 
@@ -18,6 +18,7 @@ type FormProps = {
     isInvalid?: boolean;
     textHelp?: string;
     error?: string;
+    icon?: React.ReactNode;
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -30,6 +31,7 @@ const defaultProps = {
     isValid: false,
     isInvalid: false,
     textHelp: '',
+    icon: '',
 };
 
 const FormInput: React.FC<FormProps> = (props: InferredProps & FormProps) => {
@@ -46,22 +48,32 @@ const FormInput: React.FC<FormProps> = (props: InferredProps & FormProps) => {
         isInvalid,
         error,
         textHelp,
+        icon,
     } = props;
     const classes = useStyles();
     return (
         <Form.Group className={classes.formGroup} controlId={controlId}>
             <Form.Label className={classes.label}>{label}</Form.Label>
-            <Form.Control
-                type={type}
-                placeholder={placeholder}
-                value={value}
-                name={name}
-                onChange={onChange}
-                disabled={disabled}
-                isValid={isValid}
-                isInvalid={isInvalid}
-                className={classes.input}
-            />
+            <InputGroup>
+                {icon && (
+                    <InputGroup.Prepend>
+                        <InputGroup.Text className={classes.inputIcon} id="inputGroupPrepend">
+                            {icon}
+                        </InputGroup.Text>
+                    </InputGroup.Prepend>
+                )}
+                <Form.Control
+                    type={type}
+                    placeholder={placeholder}
+                    value={value}
+                    name={name}
+                    onChange={onChange}
+                    disabled={disabled}
+                    isValid={isValid}
+                    isInvalid={isInvalid}
+                    className={classes.input}
+                />
+            </InputGroup>
             <Form.Text id={controlId}>{textHelp}</Form.Text>
             <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
         </Form.Group>
@@ -83,6 +95,7 @@ FormInput.propTypes = {
     isInvalid: PropTypes.bool,
     textHelp: PropTypes.string,
     error: PropTypes.string,
+    icon: PropTypes.node,
 };
 
 export default FormInput;

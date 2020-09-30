@@ -1,6 +1,6 @@
 import { boxShadowLight, defaultFont, hexToRgb } from '../sharedSportEraStyles.jss';
 
-const buttonStyles = () => ({
+const buttonStyles = {
     fullWidth: {
         ...defaultFont,
         ...boxShadowLight,
@@ -15,6 +15,9 @@ const buttonStyles = () => ({
     },
     red: {},
     green: {},
-});
+    rounded: {
+        borderRadius: '1rem',
+    },
+};
 
 export default buttonStyles;

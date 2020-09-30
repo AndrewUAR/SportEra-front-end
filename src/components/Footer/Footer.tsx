@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { createUseStyles } from 'react-jss';
 import { Nav, Navbar } from 'react-bootstrap';
 import styles from '../../assets/jss/components/footerStyles.jss';
 
 const useStyles = createUseStyles(styles);
 
-const Footer: React.FC = (props) => {
+const Footer: React.FC = () => {
     const classes = useStyles();
     return (
         <Navbar className={classes.footer} sticky="bottom">
@@ -21,7 +20,5 @@ const Footer: React.FC = (props) => {
         </Navbar>
     );
 };
-
-Footer.propTypes = {};
 
 export default Footer;

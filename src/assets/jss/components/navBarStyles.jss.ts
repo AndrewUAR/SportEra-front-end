@@ -1,6 +1,6 @@
-import { boxShadow, boxShadowLight, defaultFont, hexToRgb } from '../sharedSportEraStyles.jss';
+import { boxShadow, defaultFont, hexToRgb } from '../sharedSportEraStyles.jss';
 
-const navBarStyles = () => ({
+const navBarStyles = {
     navBar: {
         ...boxShadow,
         whiteSpace: 'nowrap',
@@ -49,6 +49,6 @@ const navBarStyles = () => ({
             },
         },
     },
-});
+};
 
 export default navBarStyles;
