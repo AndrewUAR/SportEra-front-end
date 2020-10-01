@@ -1,4 +1,4 @@
-import { defaultFont } from '../sharedSportEraStyles.jss';
+import { blueButton, boxShadowLight, defaultFont } from '../sharedSportEraStyles.jss';
 
 const registerPageStyle = {
     pageHeader: {
@@ -44,6 +44,16 @@ const registerPageStyle = {
             marginLeft: '0.5rem',
             background: 'linear-gradient(to left, rgba(240,240,240,0), #000)',
         },
+    },
+    submitButton: {
+        ...defaultFont,
+        ...boxShadowLight,
+        ...blueButton,
+        fontWeight: '600',
+        textTransform: 'uppercase',
+        width: '100%',
+        marginTop: '1rem',
+        borderRadius: '1rem',
     },
     loginRegisterTitle: {
         '&::before': {

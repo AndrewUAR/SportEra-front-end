@@ -35,6 +35,14 @@ const formInputStyles = {
         border: 'none',
         color: `rgba(${hexToRgb(whiteColor)}, 0.7)`,
     },
+    feedback: {
+        ...defaultFont,
+        fontSize: '0.75rem',
+        fontWeight: '600',
+        display: 'inline-block',
+        margin: '0 0 0 2.25rem',
+        whiteSpace: 'break-spaces',
+    },
 };
 
 export default formInputStyles;

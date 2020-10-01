@@ -1,31 +1,33 @@
 import React, { useState } from 'react';
-import { Col, Container, Form, Nav, Row } from 'react-bootstrap';
+import { Col, Container, Row, Button } from 'react-bootstrap';
 import { createUseStyles } from 'react-jss';
+import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { Form, Formik } from 'formik';
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/Card/CardHeader';
-import CardFooter from '../../components/Card/CardFooter';
 import CardBody from '../../components/Card/CardBody';
 import FormInput from '../../components/FormInput/FormInput';
-import Button from '../../components/Button/Button';
 import styles from '../../assets/jss/views/registerLoginPageStyles.jss';
 
 library.add(faEnvelope);
 
 const useStyles = createUseStyles(styles);
 
+const schema = Yup.object().shape({
+    email: Yup.string().email('Provided email is invalid').required('Please provide your recovery email'),
+});
+
 const ForgotPasswordPage: React.FunctionComponent = (props) => {
     const classes = useStyles();
 
     const [email, setEmail] = useState<string>('');
 
-    const [emailError, setEmailError] = useState<string>('');
-
     const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const { name } = event.target;
-        setEmail(email);
+        const { value } = event.target;
+        setEmail(value);
     };
 
     return (
@@ -37,25 +39,42 @@ const ForgotPasswordPage: React.FunctionComponent = (props) => {
                             <h3 className={`${classes.cardTitle} ${classes.forgotResetTitle}`}>Reset Password</h3>
                         </CardHeader>
                         <CardBody>
-                            <Form>
-                                <FormInput
-                                    controlId="formEmail"
-                                    label="Email"
-                                    name="email"
-                                    placeholder="Please enter your email"
-                                    value={email}
-                                    type="email"
-                                    onChange={onChange}
-                                    disabled={false}
-                                    icon={<FontAwesomeIcon icon={faEnvelope} size="lg" />}
-                                    isValid={!emailError && !!email}
-                                    isInvalid={!!emailError}
-                                    error={emailError}
-                                />
-                                <Button type="submit" size="sm" disabled={false} fullWidth color="blue" rounded>
-                                    Send password reset email
-                                </Button>
-                            </Form>
+                            <Formik
+                                validationSchema={schema}
+                                onSubmit={(values, actions) => {
+                                    console.log(values);
+                                    actions.setSubmitting(false);
+                                }}
+                                initialValues={{ email }}
+                                enableReinitialize
+                            >
+                                {({ values, touched, errors, isSubmitting }) => (
+                                    <Form noValidate>
+                                        <FormInput
+                                            controlId="formEmail"
+                                            label="Email"
+                                            name="email"
+                                            placeholder="Please enter your email"
+                                            value={values.email}
+                                            type="email"
+                                            onChange={onChange}
+                                            disabled={false}
+                                            icon={<FontAwesomeIcon icon={faEnvelope} size="lg" />}
+                                            isValid={touched.email && !errors.email}
+                                            isInvalid={!!errors.email}
+                                            error={errors.email}
+                                        />
+                                        <Button
+                                            className={classes.submitButton}
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                            size="sm"
+                                        >
+                                            Send password reset email
+                                        </Button>
+                                    </Form>
+                                )}
+                            </Formik>
                         </CardBody>
                     </Card>
                 </Col>

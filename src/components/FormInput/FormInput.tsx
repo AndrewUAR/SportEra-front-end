@@ -51,6 +51,7 @@ const FormInput: React.FC<FormProps> = (props: InferredProps & FormProps) => {
         icon,
     } = props;
     const classes = useStyles();
+    console.log(error);
     return (
         <Form.Group className={classes.formGroup} controlId={controlId}>
             <Form.Label className={classes.label}>{label}</Form.Label>
@@ -74,8 +75,12 @@ const FormInput: React.FC<FormProps> = (props: InferredProps & FormProps) => {
                     className={classes.input}
                 />
             </InputGroup>
-            <Form.Text id={controlId}>{textHelp}</Form.Text>
-            <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
+            {textHelp && <Form.Text id={controlId}>{textHelp}</Form.Text>}
+            {error && (
+                <Form.Control.Feedback className={classes.feedback} type="invalid">
+                    {error}
+                </Form.Control.Feedback>
+            )}
         </Form.Group>
     );
 };

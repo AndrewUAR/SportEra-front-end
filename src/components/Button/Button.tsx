@@ -9,7 +9,7 @@ const useStyles = createUseStyles(styles);
 
 type CustomButtonProps = {
     children: React.ReactNode;
-    type?: string;
+    type?: 'button' | 'submit';
     href?: string;
     size?: 'sm' | 'lg';
     disabled?: boolean;
@@ -21,7 +21,7 @@ type CustomButtonProps = {
 type InferredProps = InferProps<typeof CustomButton.propTypes>;
 
 const defaultProps = {
-    type: 'button',
+    type: 'button' as 'button' | 'submit',
     href: '#',
     size: 'sm' as 'sm' | 'lg',
     disabled: false,
@@ -32,12 +32,15 @@ const defaultProps = {
 
 const CustomButton: React.FC<CustomButtonProps> = (props: InferredProps & CustomButtonProps) => {
     const classes = useStyles();
+
     const { children, type, href, size, disabled, fullWidth, color = 'blue', rounded } = props;
+
     const buttonClasses = classNames({
         [classes.fullWidth]: fullWidth,
         [classes[color]]: color,
         [classes.rounded]: rounded,
     });
+
     return (
         <Button className={buttonClasses} type={type} href={href} size={size} disabled={disabled}>
             {children}
@@ -49,7 +52,7 @@ CustomButton.defaultProps = defaultProps;
 
 CustomButton.propTypes = {
     children: PropTypes.node.isRequired,
-    type: PropTypes.string,
+    type: PropTypes.oneOf(['button', 'submit']),
     href: PropTypes.string,
     size: PropTypes.oneOf(['sm', 'lg', undefined]),
     disabled: PropTypes.bool,

@@ -63,4 +63,19 @@ const boxShadowLight = {
                 0 8px 10px -5px rgba(${hexToRgb(blackColor)}, 0.1)`,
 };
 
-export { hexToRgb, container, containerFluid, defaultFont, boxShadow, blackColor, whiteColor, boxShadowLight };
+const blueButton = {
+    background: `linear-gradient(to right top, rgba(${hexToRgb('#005c97')}),
+    rgba(${hexToRgb('#363795')}))`,
+};
+
+export {
+    hexToRgb,
+    container,
+    containerFluid,
+    defaultFont,
+    blueButton,
+    boxShadow,
+    blackColor,
+    whiteColor,
+    boxShadowLight,
+};
