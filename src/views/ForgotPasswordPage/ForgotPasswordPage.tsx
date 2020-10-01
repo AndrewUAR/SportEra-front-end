@@ -17,9 +17,7 @@ library.add(faEnvelope);
 const useStyles = createUseStyles(styles);
 
 const schema = Yup.object().shape({
-    email: Yup.string()
-      .email('Provided email is invalid')
-      .required('Please provide your recovery email'),
+    email: Yup.string().email('Provided email is invalid').required('Please provide your recovery email'),
 });
 
 const ForgotPasswordPage: React.FunctionComponent = (props) => {

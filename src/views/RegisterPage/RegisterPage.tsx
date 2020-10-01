@@ -25,9 +25,7 @@ const schema = Yup.object().shape({
         .min(4, 'Username is too short! Minimum 4 characters')
         .max(25, 'Username is too long! Maximum 25 characters')
         .required('Please enter a username'),
-    email: Yup.string()
-        .email('Provided email is invalid')
-        .required('Please enter a valid email'),
+    email: Yup.string().email('Provided email is invalid').required('Please enter a valid email'),
     password: Yup.string()
         .min(8, 'Password is too short! Minimum 8 characters')
         .max(255, 'Password is too long! Maximum 255 characters')
@@ -71,7 +69,6 @@ const RegisterPage: React.FC = (props) => {
         }));
     };
 
-
     return (
         <Container className={classes.pageHeader}>
             <Row className={classes.row}>
@@ -81,7 +78,7 @@ const RegisterPage: React.FC = (props) => {
                             <h3 className={`${classes.cardTitle} ${classes.loginRegisterTitle}`}>SIGN UP</h3>
                         </CardHeader>
                         <CardBody>
-                        <Formik
+                            <Formik
                                 validationSchema={schema}
                                 onSubmit={(values, actions) => {
                                     console.log(values);
@@ -91,72 +88,72 @@ const RegisterPage: React.FC = (props) => {
                                 enableReinitialize
                             >
                                 {({ values, touched, errors, isSubmitting }) => (
-                            <Form noValidate>
-                                <FormInput
-                                    controlId="formUsername"
-                                    label="Username"
-                                    name="username"
-                                    placeholder="Please enter your username"
-                                    value={values.username}
-                                    onChange={onChange}
-                                    disabled={false}
-                                    icon={<FontAwesomeIcon icon={faUserCircle} size="lg" />}
-                                    isValid={touched.username && !errors.username}
-                                    isInvalid={!!errors.username}
-                                    error={errors.username}
-                                />
-                                <FormInput
-                                    controlId="formEmail"
-                                    label="Email"
-                                    name="email"
-                                    placeholder="Please enter your email"
-                                    value={values.email}
-                                    type="email"
-                                    onChange={onChange}
-                                    disabled={false}
-                                    icon={<FontAwesomeIcon icon={faEnvelope} size="lg" />}
-                                    isValid={touched.email && !errors.email}
-                                    isInvalid={!!errors.email}
-                                    error={errors.email}
-                                />
-                                <FormInput
-                                    controlId="formPassword"
-                                    label="Password"
-                                    name="password"
-                                    placeholder="Please enter your password"
-                                    value={values.password}
-                                    type="password"
-                                    onChange={onChange}
-                                    disabled={false}
-                                    icon={<FontAwesomeIcon icon={faLock} size="lg" />}
-                                    isValid={touched.password && !errors.password}
-                                    isInvalid={!!errors.password}
-                                    error={errors.password}
-                                />
-                                <FormInput
-                                    controlId="formPasswordConfirm"
-                                    label="Password Confirm"
-                                    name="passwordConfirm"
-                                    placeholder="Please confirm your password"
-                                    value={values.passwordConfirm}
-                                    type="password"
-                                    onChange={onChange}
-                                    disabled={false}
-                                    icon={<FontAwesomeIcon icon={faLock} size="lg" />}
-                                    isValid={touched.passwordConfirm && !errors.passwordConfirm}
-                                    isInvalid={!!errors.passwordConfirm}
-                                    error={errors.passwordConfirm}
-                                />
-                                <Button 
-                                    className={classes.submitButton} 
-                                    type="submit" 
-                                    size="sm"
-                                    disabled={isSubmitting}
-                                >
-                                    Sign Up
-                                </Button>
-                            </Form>
-                            )}
+                                    <Form noValidate>
+                                        <FormInput
+                                            controlId="formUsername"
+                                            label="Username"
+                                            name="username"
+                                            placeholder="Please enter your username"
+                                            value={values.username}
+                                            onChange={onChange}
+                                            disabled={false}
+                                            icon={<FontAwesomeIcon icon={faUserCircle} size="lg" />}
+                                            isValid={touched.username && !errors.username}
+                                            isInvalid={!!errors.username}
+                                            error={errors.username}
+                                        />
+                                        <FormInput
+                                            controlId="formEmail"
+                                            label="Email"
+                                            name="email"
+                                            placeholder="Please enter your email"
+                                            value={values.email}
+                                            type="email"
+                                            onChange={onChange}
+                                            disabled={false}
+                                            icon={<FontAwesomeIcon icon={faEnvelope} size="lg" />}
+                                            isValid={touched.email && !errors.email}
+                                            isInvalid={!!errors.email}
+                                            error={errors.email}
+                                        />
+                                        <FormInput
+                                            controlId="formPassword"
+                                            label="Password"
+                                            name="password"
+                                            placeholder="Please enter your password"
+                                            value={values.password}
+                                            type="password"
+                                            onChange={onChange}
+                                            disabled={false}
+                                            icon={<FontAwesomeIcon icon={faLock} size="lg" />}
+                                            isValid={touched.password && !errors.password}
+                                            isInvalid={!!errors.password}
+                                            error={errors.password}
+                                        />
+                                        <FormInput
+                                            controlId="formPasswordConfirm"
+                                            label="Password Confirm"
+                                            name="passwordConfirm"
+                                            placeholder="Please confirm your password"
+                                            value={values.passwordConfirm}
+                                            type="password"
+                                            onChange={onChange}
+                                            disabled={false}
+                                            icon={<FontAwesomeIcon icon={faLock} size="lg" />}
+                                            isValid={touched.passwordConfirm && !errors.passwordConfirm}
+                                            isInvalid={!!errors.passwordConfirm}
+                                            error={errors.passwordConfirm}
+                                        />
+                                        <Button
+                                            className={classes.submitButton}
+                                            type="submit"
+                                            size="sm"
+                                            disabled={isSubmitting}
+                                        >
+                                            Sign Up
+                                        </Button>
+                                    </Form>
+                                )}
                             </Formik>
                         </CardBody>
                         <CardFooter loginRegisterFooter>
