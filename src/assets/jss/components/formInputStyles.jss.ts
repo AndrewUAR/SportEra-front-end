@@ -1,4 +1,4 @@
-import { boxShadow, boxShadowLight, defaultFont, hexToRgb, whiteColor } from '../sharedSportEraStyles.jss';
+import { boxShadowLight, defaultFont, hexToRgb, whiteColor } from '../sharedSportEraStyles.jss';
 
 const formInputStyles = {
     formGroup: {
