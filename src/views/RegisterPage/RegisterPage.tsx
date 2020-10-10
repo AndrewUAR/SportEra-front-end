@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes, { InferProps } from 'prop-types';
 import { Container, Row, Col, Nav, Button } from 'react-bootstrap';
 import { createUseStyles } from 'react-jss';
-import classNames from 'classnames';
+import { connect, ConnectedProps } from 'react-redux';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUserCircle, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 import FormInput from '../../components/FormInput/FormInput';
 import styles from '../../assets/jss/views/registerLoginPageStyles.jss';
 import CardBody from '../../components/Card/CardBody';
@@ -15,6 +17,9 @@ import Card from '../../components/Card/Card';
 
 import CardHeader from '../../components/Card/CardHeader';
 import CardFooter from '../../components/Card/CardFooter';
+import { RootState } from '../../app/reducers/rootReducer';
+import { registerUser as signUp } from '../../app/actions/authActions';
+import { UserRegisterState } from '../../app/constants/authTypes';
 
 library.add(faUserCircle, faEnvelope, faLock);
 
@@ -42,24 +47,39 @@ const schema = Yup.object().shape({
         .required('Password confirm is required'),
 });
 
-type UserState = {
-    username: string;
-    email: string;
-    password: string;
-    passwordConfirm: string;
-};
+type InferredProps = InferProps<typeof RegisterPage.propTypes>;
 
-// type InferredProps = InferProps<typeof RegisterPage.propTypes>;
+const mapStateToProps = (state: RootState) => ({
+    authUser: state.auth,
+    validationErrors: state.error.validationErrors,
+});
 
-const RegisterPage: React.FC = (props) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, AnyAction>) => ({
+    registerUser: (user: UserRegisterState) => dispatch(signUp(user)),
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type RegisterPageProps = PropsFromRedux;
+
+const RegisterPage: React.FC<RegisterPageProps> = (props: InferredProps & RegisterPageProps) => {
+    const { registerUser, authUser, validationErrors } = props;
+
     const classes = useStyles();
 
-    const [user, setUser] = useState<UserState>({
+    const [user, setUser] = useState<UserRegisterState>({
         username: '',
         email: '',
         password: '',
         passwordConfirm: '',
     });
+
+    useEffect(() => {
+        setValidateErrors((prevState) => ({
+            ...prevState,
+            
+        }))
+    }, [validationErrors]);
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = event.target;
@@ -81,7 +101,7 @@ const RegisterPage: React.FC = (props) => {
                             <Formik
                                 validationSchema={schema}
                                 onSubmit={(values, actions) => {
-                                    console.log(values);
+                                    registerUser(user);
                                     actions.setSubmitting(false);
                                 }}
                                 initialValues={{ ...user }}
@@ -98,9 +118,9 @@ const RegisterPage: React.FC = (props) => {
                                             onChange={onChange}
                                             disabled={false}
                                             icon={<FontAwesomeIcon icon={faUserCircle} size="lg" />}
-                                            isValid={touched.username && !errors.username}
-                                            isInvalid={!!errors.username}
-                                            error={errors.username}
+                                            isValid={touched.username && !errors.username && !validationErrors.username}
+                                            isInvalid={!!errors.username || !!validationErrors.username}
+                                            error={errors.username ? errors.username : validationErrors.username }
                                         />
                                         <FormInput
                                             controlId="formEmail"
@@ -112,9 +132,9 @@ const RegisterPage: React.FC = (props) => {
                                             onChange={onChange}
                                             disabled={false}
                                             icon={<FontAwesomeIcon icon={faEnvelope} size="lg" />}
-                                            isValid={touched.email && !errors.email}
+                                            isValid={touched.email && !errors.email && !validationErrors.email}
                                             isInvalid={!!errors.email}
-                                            error={errors.email}
+                                            error={errors.email ? errors.email : validationErrors.email}
                                         />
                                         <FormInput
                                             controlId="formPassword"
@@ -126,9 +146,9 @@ const RegisterPage: React.FC = (props) => {
                                             onChange={onChange}
                                             disabled={false}
                                             icon={<FontAwesomeIcon icon={faLock} size="lg" />}
-                                            isValid={touched.password && !errors.password}
+                                            isValid={touched.password && !errors.password && !validationErrors.password}
                                             isInvalid={!!errors.password}
-                                            error={errors.password}
+                                            error={errors.password ? errors.password : validationErrors.password}
                                         />
                                         <FormInput
                                             controlId="formPasswordConfirm"
@@ -167,8 +187,8 @@ const RegisterPage: React.FC = (props) => {
     );
 };
 
-// RegisterPage.propTypes = {
+RegisterPage.propTypes = {
+    registerUser: PropTypes.func.isRequired,
+};
 
-// };
-
-export default RegisterPage;
+export default connector(RegisterPage);
