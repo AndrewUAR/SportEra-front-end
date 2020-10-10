@@ -1,27 +1,27 @@
 import _ from 'lodash';
 import { Reducer } from 'react';
 
-import { AUTHENTICATE_USER, AuthActionTypes, REGISTER_USER, LOGOUT } from '../constants/auth';
+import { AUTHENTICATE_USER, AuthActionTypes } from '../constants/authTypes';
 import { IAuthState } from '../states/authState';
 
-const initialState: IAuthState = {
+export const initialState = {
     loggedIn: false,
     username: '',
     email: '',
     role: '',
     profileImage: '',
-    loading: false,
 };
 
-const authReducer: Reducer<IAuthState, AuthActionTypes> = (state = initialState, action) => {
+const authReducer: Reducer<IAuthState, AuthActionTypes> = (state = initialState, action): IAuthState => {
     switch (action.type) {
         case AUTHENTICATE_USER: {
-            console.log(action);
-            // const {username, email} = action.payload;
             return {
                 ...state,
-                ...action.payload,
                 loggedIn: true,
+                username: action.payload.username || '',
+                email: action.payload.email || '',
+                role: action.payload.role || '',
+                profileImage: action.payload.profileImage || '',
             };
         }
         default:

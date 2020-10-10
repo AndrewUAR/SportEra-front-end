@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import PropTypes, { InferProps } from 'prop-types';
+import { connect, ConnectedProps } from 'react-redux';
 import { Col, Container, Nav, Row, Button } from 'react-bootstrap';
 import { createUseStyles } from 'react-jss';
-import classNames from 'classnames';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUserCircle, faLock } from '@fortawesome/free-solid-svg-icons';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { useHistory } from 'react-router-dom';
 import Card from '../../components/Card/Card';
 import CardHeader from '../../components/Card/CardHeader';
 import CardFooter from '../../components/Card/CardFooter';
 import CardBody from '../../components/Card/CardBody';
 import FormInput from '../../components/FormInput/FormInput';
 import styles from '../../assets/jss/views/registerLoginPageStyles.jss';
+import { authenticateUser as signIn } from '../../app/actions/authActions';
+import { RootState } from '../../app/reducers/rootReducer';
+import { UserLoginState } from '../../app/constants/authTypes';
 
 library.add(faUserCircle, faLock);
 
@@ -24,15 +30,37 @@ const schema = Yup.object().shape({
     password: Yup.string().required('Password is missing'),
 });
 
-type UserState = {
-    username: string;
-    password: string;
-};
+const mapStateToProps = (state: RootState) => ({
+    authUser: state.auth,
+});
 
-const LoginPage: React.FC = (props) => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, AnyAction>) => ({
+    authenticateUser: (user: UserLoginState) => dispatch(signIn(user)),
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type LoginPageProps = PropsFromRedux;
+
+type InferredProps = InferProps<typeof LoginPage.propTypes>;
+
+const LoginPage: React.FC<LoginPageProps> = (props: InferredProps & LoginPageProps) => {
+    const { authenticateUser, authUser } = props;
+
+    const { loggedIn } = authUser;
+
+    const history = useHistory();
+
     const classes = useStyles();
 
-    const [user, setUser] = useState<UserState>({
+    useEffect(() => {
+        if (loggedIn) {
+            history.push('/');
+        }
+    });
+
+    const [user, setUser] = useState<UserLoginState>({
         username: '',
         password: '',
     });
@@ -57,7 +85,7 @@ const LoginPage: React.FC = (props) => {
                             <Formik
                                 validationSchema={schema}
                                 onSubmit={(values, actions) => {
-                                    console.log(values);
+                                    authenticateUser(user);
                                     actions.setSubmitting(false);
                                 }}
                                 initialValues={{ ...user }}
@@ -115,6 +143,8 @@ const LoginPage: React.FC = (props) => {
     );
 };
 
-LoginPage.propTypes = {};
+LoginPage.propTypes = {
+    authenticateUser: PropTypes.func.isRequired,
+};
 
-export default LoginPage;
+export default connector(LoginPage);

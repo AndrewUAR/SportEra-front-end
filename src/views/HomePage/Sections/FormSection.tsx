@@ -39,10 +39,23 @@ const FormSection: React.FC = (props) => {
                     />
                     <Row noGutters>
                         <Col>
-                            <SelectInput controlId="activity" label="Choose activity" name="activity" value="value" color="dark" />
+                            <SelectInput
+                                controlId="activity"
+                                label="Choose activity"
+                                name="activity"
+                                value="value"
+                                color="dark"
+                            />
                         </Col>
+                        &nbsp;
                         <Col>
-                            <SelectInput controlId="activity" label="Skill level" name="activity" value="value" color="dark" />
+                            <SelectInput
+                                controlId="activity"
+                                label="Skill level"
+                                name="activity"
+                                value="value"
+                                color="dark"
+                            />
                         </Col>
                     </Row>
                     <Button className={classes.searchButton} type="submit" size="sm">

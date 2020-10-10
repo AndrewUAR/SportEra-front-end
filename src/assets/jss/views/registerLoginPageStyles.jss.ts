@@ -54,6 +54,7 @@ const registerPageStyle = {
         width: '100%',
         marginTop: '1rem',
         borderRadius: '1rem',
+        border: 'none',
     },
     loginRegisterTitle: {
         '&::before': {

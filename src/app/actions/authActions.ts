@@ -1,11 +1,6 @@
 import { ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import {
-    AUTHENTICATE_USER,
-    IAuthenticateUserAction,
-    UserLoginState,
-    UserRegisterState,
-} from '../constants/authTypes';
+import { AUTHENTICATE_USER, IAuthenticateUserAction, UserLoginState, UserRegisterState } from '../constants/authTypes';
 import { forgotPassword, signInUser, signUpUser } from '../services/auth.service';
 import { RootState } from '../reducers/rootReducer';
 import { SET_ERROR } from '../constants/errorTypes';

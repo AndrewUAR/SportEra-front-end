@@ -15,8 +15,6 @@ const formInputStyles = {
             fontSize: '0.75rem',
             fontWeight: '500',
             color: whiteColor,
-            background: `linear-gradient(to right top, rgba(${hexToRgb('#00c6ff')}, 0.8),
-              rgba(${hexToRgb('#0072ff')}, 0.7))`,
         },
     },
     label: {
@@ -42,6 +40,18 @@ const formInputStyles = {
         display: 'inline-block',
         margin: '0 0 0 2.25rem',
         whiteSpace: 'break-spaces',
+    },
+    blue: {
+        '&,&:focus': {
+            background: `linear-gradient(to right top, rgba(${hexToRgb('#00c6ff')}, 0.8),
+            rgba(${hexToRgb('#0072ff')}, 0.7))`,
+        },
+    },
+    dark: {
+        '&,&:focus': {
+            background: `linear-gradient(to right top, rgba(${hexToRgb('#606c88')}, 0.8),
+                rgba(${hexToRgb('#3f4c6b')}, 0.7))`,
+        },
     },
 };
 

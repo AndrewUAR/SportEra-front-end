@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes, { InferProps } from 'prop-types';
+import classNames from 'classnames';
 import { Form, InputGroup } from 'react-bootstrap';
 import { createUseStyles } from 'react-jss';
 import styles from '../../assets/jss/components/formInputStyles.jss';
@@ -10,6 +11,7 @@ type FormProps = {
     controlId: string;
     label: string;
     type?: string;
+    color?: 'blue' | 'dark';
     placeholder: string;
     value: string;
     name: string;
@@ -32,6 +34,7 @@ const defaultProps = {
     isInvalid: false,
     textHelp: '',
     icon: '',
+    color: 'blue' as 'blue' | 'dark',
 };
 
 const FormInput: React.FC<FormProps> = (props: InferredProps & FormProps) => {
@@ -49,9 +52,16 @@ const FormInput: React.FC<FormProps> = (props: InferredProps & FormProps) => {
         error,
         textHelp,
         icon,
+        color = 'blue',
     } = props;
+
     const classes = useStyles();
-    console.log(error);
+
+    const inputClasses = classNames({
+        [classes.input]: true,
+        [classes[color]]: color,
+    });
+
     return (
         <Form.Group className={classes.formGroup} controlId={controlId}>
             <Form.Label className={classes.label}>{label}</Form.Label>
@@ -72,7 +82,7 @@ const FormInput: React.FC<FormProps> = (props: InferredProps & FormProps) => {
                     disabled={disabled}
                     isValid={isValid}
                     isInvalid={isInvalid}
-                    className={classes.input}
+                    className={inputClasses}
                 />
             </InputGroup>
             {textHelp && <Form.Text id={controlId}>{textHelp}</Form.Text>}
@@ -101,6 +111,7 @@ FormInput.propTypes = {
     textHelp: PropTypes.string,
     error: PropTypes.string,
     icon: PropTypes.node,
+    color: PropTypes.oneOf(['blue', 'dark']),
 };
 
 export default FormInput;

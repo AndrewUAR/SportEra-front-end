@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes, { InferProps } from 'prop-types';
 import { Container, Row, Col, Nav, Button } from 'react-bootstrap';
 import { createUseStyles } from 'react-jss';
@@ -74,13 +74,6 @@ const RegisterPage: React.FC<RegisterPageProps> = (props: InferredProps & Regist
         passwordConfirm: '',
     });
 
-    useEffect(() => {
-        setValidateErrors((prevState) => ({
-            ...prevState,
-            
-        }))
-    }, [validationErrors]);
-
     const onChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = event.target;
         setUser((prevState) => ({
@@ -120,7 +113,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props: InferredProps & Regist
                                             icon={<FontAwesomeIcon icon={faUserCircle} size="lg" />}
                                             isValid={touched.username && !errors.username && !validationErrors.username}
                                             isInvalid={!!errors.username || !!validationErrors.username}
-                                            error={errors.username ? errors.username : validationErrors.username }
+                                            error={errors.username ? errors.username : validationErrors.username}
                                         />
                                         <FormInput
                                             controlId="formEmail"

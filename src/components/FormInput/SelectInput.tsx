@@ -16,7 +16,7 @@ type SelectInputProps = {
 };
 
 const defaultProps = {
-  color: 'blue' as 'blue' | 'dark',
+    color: 'blue' as 'blue' | 'dark',
 };
 
 type InferredProps = InferProps<typeof SelectInput.propTypes>;
@@ -26,8 +26,8 @@ const SelectInput: React.FC<SelectInputProps> = (props: InferredProps & SelectIn
     const classes = useStyles();
 
     const inputClasses = classNames({
-      [classes.input]: true,
-      [classes[color]]: color
+        [classes.input]: true,
+        [classes[color]]: color,
     });
 
     return (
