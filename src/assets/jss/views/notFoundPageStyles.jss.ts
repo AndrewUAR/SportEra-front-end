@@ -28,7 +28,6 @@ const notFoundPageStyles = {
         justifyContent: 'center',
         alignItems: 'center',
         margin: 'auto',
-
     },
     code: {
         display: 'flex',
@@ -37,34 +36,35 @@ const notFoundPageStyles = {
         fontSize: '3rem',
         fontWeight: '700',
         margin: '0.75rem 0',
+        width: '100%',
         '&::before': {
-          content: '" "',
-          display: 'block',
-          height: '0.15em',
-          minWidth: '20vw',
-          marginRight: '0.5rem',
-          background: 'linear-gradient(to right, rgba(240,240,240,0), #fff)',
-      },
-      '&::after': {
-          content: '" "',
-          display: 'block',
-          height: '0.15em',
-          minWidth: '20vw',
-          marginLeft: '0.5rem',
-          background: 'linear-gradient(to left, rgba(240,240,240,0), #fff)',
-      },
+            content: '" "',
+            display: 'block',
+            height: '0.15em',
+            minWidth: '35%',
+            marginRight: '0.5rem',
+            background: 'linear-gradient(to right, rgba(240,240,240,0), #fff)',
+        },
+        '&::after': {
+            content: '" "',
+            display: 'block',
+            height: '0.15em',
+            minWidth: '35%',
+            marginLeft: '0.5rem',
+            background: 'linear-gradient(to left, rgba(240,240,240,0), #fff)',
+        },
     },
     message: {
         fontSize: '2rem',
         fontWeight: '600',
-        margin: '0.75rem 0'
+        margin: '0.75rem 0',
     },
     button: {
         fontSize: '0.85rem',
         marginTop: '1rem',
         textTransform: 'uppercase',
-        fontWeight: '600'
-    }
+        fontWeight: '600',
+    },
 };
 
 export default notFoundPageStyles;

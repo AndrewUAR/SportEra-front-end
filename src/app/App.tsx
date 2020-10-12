@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import { createUseStyles } from 'react-jss';
-import LoginPage from '../views/LoginPage/LoginPage';
-import RegisterPage from '../views/RegisterPage/RegisterPage';
-import HomePage from '../views/HomePage/HomePage';
+
 import styles from '../assets/jss/sportEraStyles.jss';
 import NavBar from '../components/NavBar/NavBar';
 import Footer from '../components/Footer/Footer';
-import ForgotPasswordPage from '../views/ForgotPasswordPage/ForgotPasswordPage';
-import ResetPasswordPage from '../views/ResetPasswordPage/ResetPasswordPage';
-import NotFoundPage from '../views/NotFoundPage/NotFoundPage';
+import RestrictedRoute from '../components/RestrictedRoute/RestrictedRoute';
+import LoadingComponent from '../components/LoadingComponent/LoadingComponent';
+
+const HomePage = lazy(() => import('../views/HomePage/HomePage'));
+const LoginPage = lazy(() => import('../views/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('../views/RegisterPage/RegisterPage'));
+const ForgotPasswordPage = lazy(() => import('../views/ForgotPasswordPage/ForgotPasswordPage'));
+const ResetPasswordPage = lazy(() => import('../views/ResetPasswordPage/ResetPasswordPage'));
+const NotFoundPage = lazy(() => import('../views/NotFoundPage/NotFoundPage'));
+
 
 const useStyles = createUseStyles({ '@global': styles });
 
@@ -19,14 +24,16 @@ const App: React.FC = () => {
     return (
         <>
             <NavBar />
-            <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route path="/login" component={LoginPage} />
-                <Route path="/register" component={RegisterPage} />
-                <Route path="/forgot-password" component={ForgotPasswordPage} />
-                <Route path="/reset-password/:token" component={ResetPasswordPage} />
-                <Route path="*" component={NotFoundPage} />
-            </Switch>
+                <Suspense fallback={<LoadingComponent />}>
+                    <Switch>
+                        <Route exact path="/" component={HomePage} />
+                        <Route path="/login" component={LoginPage} />
+                        <RestrictedRoute path="/register" component={RegisterPage} />
+                        <Route path="/forgot-password" component={ForgotPasswordPage} />
+                        <Route path="/reset-password/:token" component={ResetPasswordPage} />
+                        <Route path="*" component={NotFoundPage} />
+                    </Switch>
+                </Suspense>
             <Footer />
         </>
     );

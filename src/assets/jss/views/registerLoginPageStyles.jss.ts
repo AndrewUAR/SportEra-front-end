@@ -28,11 +28,12 @@ const registerPageStyle = {
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
+        width: '100% !important',
         '&::before': {
             content: '" "',
             display: 'block',
             height: '0.15em',
-            minWidth: '20vw',
+            width: '30%',
             marginRight: '0.5rem',
             background: 'linear-gradient(to right, rgba(240,240,240,0), #000)',
         },
@@ -40,7 +41,7 @@ const registerPageStyle = {
             content: '" "',
             display: 'block',
             height: '0.15em',
-            minWidth: '20vw',
+            width: '30%',
             marginLeft: '0.5rem',
             background: 'linear-gradient(to left, rgba(240,240,240,0), #000)',
         },
@@ -56,54 +57,12 @@ const registerPageStyle = {
         borderRadius: '1rem',
         border: 'none',
     },
-    loginRegisterTitle: {
-        '&::before': {
-            '@media (min-width: 768px)': {
-                minWidth: '15vw',
-            },
-            '@media (min-width: 992px)': {
-                minWidth: '7vw',
-            },
-            '@media (min-width: 1200px)': {
-                minWidth: '4vw',
-            },
-        },
-        '&::after': {
-            '@media (min-width: 768px)': {
-                minWidth: '15vw',
-            },
-            '@media (min-width: 992px)': {
-                minWidth: '7vw',
-            },
-            '@media (min-width: 1200px)': {
-                minWidth: '4vw',
-            },
-        },
-    },
     forgotResetTitle: {
         '&::before': {
-            minWidth: '14vw',
-            '@media (min-width: 768px)': {
-                minWidth: '10vw',
-            },
-            '@media (min-width: 992px)': {
-                minWidth: '5.25vw',
-            },
-            '@media (min-width: 1200px)': {
-                minWidth: '4vw',
-            },
+            width: '20%',
         },
         '&::after': {
-            minWidth: '14vw',
-            '@media (min-width: 768px)': {
-                minWidth: '10vw',
-            },
-            '@media (min-width: 992px)': {
-                minWidth: '5.25vw',
-            },
-            '@media (min-width: 1200px)': {
-                minWidth: '4vw',
-            },
+            width: '20%',
         },
     },
 };

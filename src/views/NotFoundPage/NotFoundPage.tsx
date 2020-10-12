@@ -12,7 +12,9 @@ const NotFoundPage: React.FC = () => {
             <div className={classes.wrapper}>
                 <div className={classes.code}>404</div>
                 <div className={classes.message}>Page Not Found</div>
-                <Button href="/" className={classes.button}>Return to SportEra</Button>
+                <Button href="/" className={classes.button}>
+                    Return to SportEra
+                </Button>
             </div>
         </div>
     );

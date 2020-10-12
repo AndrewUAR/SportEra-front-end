@@ -79,7 +79,7 @@ const LoginPage: React.FC<LoginPageProps> = (props: InferredProps & LoginPagePro
                 <Col sm={11} md={8} lg={5}>
                     <Card loginRegisterCard>
                         <CardHeader loginRegisterHeader>
-                            <h3 className={`${classes.cardTitle} ${classes.loginRegisterTitle}`}>SIGN IN</h3>
+                            <h3 className={classes.cardTitle}>SIGN IN</h3>
                         </CardHeader>
                         <CardBody>
                             <Formik

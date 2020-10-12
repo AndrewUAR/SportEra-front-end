@@ -88,7 +88,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props: InferredProps & Regist
                 <Col sm={11} md={8} lg={5}>
                     <Card loginRegisterCard>
                         <CardHeader loginRegisterHeader>
-                            <h3 className={`${classes.cardTitle} ${classes.loginRegisterTitle}`}>SIGN UP</h3>
+                            <h3 className={classes.cardTitle}>SIGN UP</h3>
                         </CardHeader>
                         <CardBody>
                             <Formik
