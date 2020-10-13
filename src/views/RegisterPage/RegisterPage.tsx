@@ -50,7 +50,6 @@ const schema = Yup.object().shape({
 type InferredProps = InferProps<typeof RegisterPage.propTypes>;
 
 const mapStateToProps = (state: RootState) => ({
-    authUser: state.auth,
     validationErrors: state.error.validationErrors,
 });
 
@@ -63,7 +62,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type RegisterPageProps = PropsFromRedux;
 
 const RegisterPage: React.FC<RegisterPageProps> = (props: InferredProps & RegisterPageProps) => {
-    const { registerUser, authUser, validationErrors } = props;
+    const { registerUser, validationErrors } = props;
 
     const classes = useStyles();
 
@@ -93,6 +92,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props: InferredProps & Regist
                         <CardBody>
                             <Formik
                                 validationSchema={schema}
+                                // eslint-disable-line
                                 onSubmit={(values, actions) => {
                                     registerUser(user);
                                     actions.setSubmitting(false);

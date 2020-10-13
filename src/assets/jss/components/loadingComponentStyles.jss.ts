@@ -2,17 +2,17 @@ import { hexToRgb } from '../sharedSportEraStyles.jss';
 
 const loadingComponentStyles = {
     container: {
-      height: 'calc(100vh - 9.0625rem)',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      overflow: 'hidden',
-      '@media (min-width: 576px)': {
-          height: 'calc(100vh - 6.5rem)',
-      },
-      '@media (min-width: 1200px)': {
-          height: 'calc(100vh - 7rem)',
-      },
+        height: 'calc(100vh - 9.0625rem)',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden',
+        '@media (min-width: 576px)': {
+            height: 'calc(100vh - 6.5rem)',
+        },
+        '@media (min-width: 1200px)': {
+            height: 'calc(100vh - 7rem)',
+        },
     },
     box: {
         position: 'relative',

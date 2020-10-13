@@ -1,4 +1,4 @@
-import { AnyAction, CombinedState, combineReducers, Reducer } from 'redux';
+import { combineReducers, Reducer } from 'redux';
 import { PersistConfig, persistReducer, PersistState } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { AuthActionTypes, LOGOUT } from '../constants/authTypes';

@@ -2,10 +2,7 @@ import { createStore, applyMiddleware, Store } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import { persistStore } from 'redux-persist';
-import { number } from 'yup';
 import { persistedReducer, RootReducer, RootState } from '../reducers/rootReducer';
-import { IErrorState } from '../states/errorState';
-import { IAuthState } from '../states/authState';
 import { initialState as authInitialState } from '../reducers/authReducer';
 import { initialState as errorInitialState } from '../reducers/errorReducer';
 
@@ -14,7 +11,7 @@ const initialState: RootState = {
     error: errorInitialState,
     _persist: {
         version: 1,
-        rehydrated: false,
+        rehydrated: true,
     },
 };
 

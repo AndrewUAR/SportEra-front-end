@@ -66,8 +66,8 @@ const ResetPasswordPage: React.FC = (props) => {
                         <CardBody>
                             <Formik
                                 validationSchema={schema}
+                                // eslint-disable-line
                                 onSubmit={(values, actions) => {
-                                    console.log(values);
                                     actions.setSubmitting(false);
                                 }}
                                 initialValues={{ ...user }}

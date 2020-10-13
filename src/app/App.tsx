@@ -16,7 +16,6 @@ const ForgotPasswordPage = lazy(() => import('../views/ForgotPasswordPage/Forgot
 const ResetPasswordPage = lazy(() => import('../views/ResetPasswordPage/ResetPasswordPage'));
 const NotFoundPage = lazy(() => import('../views/NotFoundPage/NotFoundPage'));
 
-
 const useStyles = createUseStyles({ '@global': styles });
 
 const App: React.FC = () => {
@@ -24,16 +23,16 @@ const App: React.FC = () => {
     return (
         <>
             <NavBar />
-                <Suspense fallback={<LoadingComponent />}>
-                    <Switch>
-                        <Route exact path="/" component={HomePage} />
-                        <Route path="/login" component={LoginPage} />
-                        <RestrictedRoute path="/register" component={RegisterPage} />
-                        <Route path="/forgot-password" component={ForgotPasswordPage} />
-                        <Route path="/reset-password/:token" component={ResetPasswordPage} />
-                        <Route path="*" component={NotFoundPage} />
-                    </Switch>
-                </Suspense>
+            <Suspense fallback={<LoadingComponent />}>
+                <Switch>
+                    <Route exact path="/" component={HomePage} />
+                    <RestrictedRoute path="/login" component={LoginPage} />
+                    <RestrictedRoute path="/register" component={RegisterPage} />
+                    <RestrictedRoute path="/forgot-password" component={ForgotPasswordPage} />
+                    <RestrictedRoute path="/reset-password/:token" component={ResetPasswordPage} />
+                    <Route path="*" component={NotFoundPage} />
+                </Switch>
+            </Suspense>
             <Footer />
         </>
     );

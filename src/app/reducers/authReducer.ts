@@ -17,7 +17,7 @@ const authReducer: Reducer<IAuthState, AuthActionTypes> = (state = initialState,
         case AUTHENTICATE_USER: {
             return {
                 ...state,
-                loggedIn: true,
+                loggedIn: !_.isEmpty(action.payload),
                 username: action.payload.username || '',
                 email: action.payload.email || '',
                 role: action.payload.role || '',

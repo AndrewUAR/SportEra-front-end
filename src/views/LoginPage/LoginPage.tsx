@@ -52,13 +52,13 @@ const LoginPage: React.FC<LoginPageProps> = (props: InferredProps & LoginPagePro
 
     const history = useHistory();
 
-    const classes = useStyles();
-
     useEffect(() => {
         if (loggedIn) {
             history.push('/');
         }
-    });
+    }, [loggedIn, history]);
+
+    const classes = useStyles();
 
     const [user, setUser] = useState<UserLoginState>({
         username: '',
@@ -84,6 +84,7 @@ const LoginPage: React.FC<LoginPageProps> = (props: InferredProps & LoginPagePro
                         <CardBody>
                             <Formik
                                 validationSchema={schema}
+                                // eslint-disable-line
                                 onSubmit={(values, actions) => {
                                     authenticateUser(user);
                                     actions.setSubmitting(false);

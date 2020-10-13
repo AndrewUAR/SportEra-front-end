@@ -31,9 +31,9 @@ const SelectInput: React.FC<SelectInputProps> = (props: InferredProps & SelectIn
     });
 
     return (
-        <Form.Group className={classes.formGroup} controlId={controlId}>
+        <Form.Group className={classes.formGroup}>
             <Form.Label className={classes.label}>{label}</Form.Label>
-            <Form.Control as="select" className={inputClasses} id="inlineFormCustomSelectPref" custom>
+            <Form.Control as="select" className={inputClasses} id={controlId} custom>
                 <option value="0">Choose...</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>

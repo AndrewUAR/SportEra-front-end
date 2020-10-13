@@ -36,6 +36,7 @@ const FormSection: React.FC = (props) => {
                         placeholder="Please enter your zipcode"
                         value={place}
                         onChange={onChange}
+                        disabled={false}
                     />
                     <Row noGutters>
                         <Col>

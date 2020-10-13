@@ -74,6 +74,7 @@ const FormInput: React.FC<FormProps> = (props: InferredProps & FormProps) => {
                     </InputGroup.Prepend>
                 )}
                 <Form.Control
+                    autoComplete="off"
                     type={type}
                     placeholder={placeholder}
                     value={value}

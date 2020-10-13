@@ -3,7 +3,8 @@ import { boxShadow, defaultFont, hexToRgb, whiteColor } from '../sharedSportEraS
 const footerStyles = {
     footer: {
         ...boxShadow,
-        color: `rgba(${hexToRgb(whiteColor)}, 0.5)` + ' !important',
+        // eslint-disable-line
+        color: 'rgba(255,255,255, 0.5) !important',
         background: `linear-gradient(to top, rgba(${hexToRgb('#232526')}, 0.5),
           rgba(${hexToRgb('#414345')}, 0.3))`,
         flexDirection: 'column',

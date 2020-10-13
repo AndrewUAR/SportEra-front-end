@@ -1,6 +1,5 @@
 import { Reducer } from 'react';
-import { AuthActionTypes } from '../constants/authTypes';
-import { ErrorActionTypes, SET_ERROR } from '../constants/errorTypes';
+import { ErrorActionTypes, HIDE_ERROR, SET_ERROR } from '../constants/errorTypes';
 import { IErrorState } from '../states/errorState';
 
 export const initialState = {
@@ -22,6 +21,17 @@ const errorReducer: Reducer<IErrorState, ErrorActionTypes> = (state = initialSta
                     username: action.payload.validationErrors.username || '',
                     email: action.payload.validationErrors.email || '',
                     password: action.payload.validationErrors.password || '',
+                },
+            };
+        }
+        case HIDE_ERROR: {
+            return {
+                ...state,
+                error: '',
+                validationErrors: {
+                    username: '',
+                    email: '',
+                    password: '',
                 },
             };
         }
