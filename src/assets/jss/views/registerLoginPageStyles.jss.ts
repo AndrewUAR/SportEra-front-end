@@ -65,6 +65,10 @@ const registerPageStyle = {
             width: '20%',
         },
     },
+    error: {
+        ...defaultFont,
+        color: 'red',
+    },
 };
 
 export default registerPageStyle;

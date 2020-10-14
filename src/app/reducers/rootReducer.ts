@@ -11,7 +11,7 @@ import errorReducer from './errorReducer';
 export type RootState = {
     auth: IAuthState;
     error: IErrorState;
-    _persist: PersistState;
+    _persist?: PersistState;
 };
 
 export type RootAction = AuthActionTypes | ErrorActionTypes;

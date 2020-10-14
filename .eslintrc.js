@@ -31,7 +31,6 @@ module.exports = {
   rules: {
     'no-param-reassign': 0,
     '@typescript-eslint/no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': 'off',
     "react/jsx-props-no-spreading": "off",
     'linebreak-style': 'off',
     'prettier/prettier': [

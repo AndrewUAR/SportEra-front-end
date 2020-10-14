@@ -9,10 +9,6 @@ import { initialState as errorInitialState } from '../reducers/errorReducer';
 const initialState: RootState = {
     auth: authInitialState,
     error: errorInitialState,
-    _persist: {
-        version: 1,
-        rehydrated: true,
-    },
 };
 
 const middlewares = [thunk];

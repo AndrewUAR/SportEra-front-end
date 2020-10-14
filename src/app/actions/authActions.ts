@@ -1,7 +1,7 @@
 import { ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
 import { AUTHENTICATE_USER, IAuthenticateUserAction, UserLoginState, UserRegisterState } from '../constants/authTypes';
-import { forgotPassword, signInUser, signUpUser } from '../services/auth.service';
+import { forgotPassword, signInUser, signOutUser, signUpUser } from '../services/auth.service';
 import { RootState } from '../reducers/rootReducer';
 import { SET_ERROR } from '../constants/errorTypes';
 
@@ -27,7 +27,7 @@ export const registerUser: ActionCreator<ThunkAction<
 export const authenticateUser: ActionCreator<ThunkAction<
     Promise<void>,
     RootState,
-    UserRegisterState,
+    UserLoginState,
     IAuthenticateUserAction
 >> = (userData: UserLoginState) => async (dispatch: Dispatch) => {
     try {
@@ -37,11 +37,28 @@ export const authenticateUser: ActionCreator<ThunkAction<
             payload: user.data,
         });
     } catch (error) {
+        console.log(error.response.data.message);
         dispatch({
             type: SET_ERROR,
             payload: {
                 error: error.response.data.message,
-                validationErrors: error.response.data.validationErrors,
+            },
+        });
+    }
+};
+
+export const logout: ActionCreator<ThunkAction<Promise<void>, RootState, null, IAuthenticateUserAction>> = () => async (
+    dispatch: Dispatch,
+) => {
+    try {
+        await signOutUser();
+        dispatch({ type: 'LOGOUT' });
+    } catch (error) {
+        console.log(error.response.data.message);
+        dispatch({
+            type: SET_ERROR,
+            payload: {
+                error: error.response.data.message,
             },
         });
     }

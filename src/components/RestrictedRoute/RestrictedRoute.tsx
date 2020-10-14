@@ -21,7 +21,7 @@ const RestrictedRoute: React.FC<RestrictedRouteTypes> = (props: RestrictedRouteT
     return (
         <Route
             {...rest}
-            render={(routeProps) => (isLoggedIn ? <Component {...routeProps} /> : <Redirect to={{ pathname: '/' }} />)}
+            render={(routeProps) => (!isLoggedIn ? <Component {...routeProps} /> : <Redirect to={{ pathname: '/' }} />)}
         />
     );
 };

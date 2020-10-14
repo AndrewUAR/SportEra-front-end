@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import PropTypes from 'prop-types';
 import { createUseStyles } from 'react-jss';
 import Carousel from 'react-bootstrap/esm/Carousel';
 import image1 from '../../../assets/img/slider/slide_1.jpg';
@@ -9,7 +8,7 @@ import styles from '../../../assets/jss/views/homePageStyles/homePageStyles.jss'
 
 const useStyles = createUseStyles(styles);
 
-const PageHeader: React.FC = (props) => {
+const PageHeader: React.FC = () => {
     const classes = useStyles();
 
     const [index, setIndex] = useState(0);
@@ -51,7 +50,5 @@ const PageHeader: React.FC = (props) => {
         </div>
     );
 };
-
-PageHeader.propTypes = {};
 
 export default PageHeader;

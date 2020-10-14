@@ -14,6 +14,10 @@ export const signInUser = async (userData: UserLoginState): Promise<any> => {
     return response;
 };
 
+export const signOutUser = async (): Promise<void> => {
+    await axios.post(`${API_ENDPOINT}/api/1.0/auth/signout`, config);
+};
+
 export const forgotPassword = async (userEmail: string): Promise<void> => {
     await axios.post(`${API_ENDPOINT}/api/1.0/auth/forgot-password?email=${userEmail}`, config);
 };

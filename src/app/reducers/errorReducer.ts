@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Reducer } from 'react';
 import { ErrorActionTypes, HIDE_ERROR, SET_ERROR } from '../constants/errorTypes';
 import { IErrorState } from '../states/errorState';
@@ -18,9 +19,13 @@ const errorReducer: Reducer<IErrorState, ErrorActionTypes> = (state = initialSta
                 ...state,
                 error: action.payload.error || '',
                 validationErrors: {
-                    username: action.payload.validationErrors.username || '',
-                    email: action.payload.validationErrors.email || '',
-                    password: action.payload.validationErrors.password || '',
+                    username: _.hasIn(action.payload, 'validationErrors')
+                        ? action.payload.validationErrors.username
+                        : '',
+                    email: _.hasIn(action.payload, 'validationErrors') ? action.payload.validationErrors.email : '',
+                    password: _.hasIn(action.payload, 'validationErrors')
+                        ? action.payload.validationErrors.password
+                        : '',
                 },
             };
         }

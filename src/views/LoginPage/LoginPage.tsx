@@ -32,6 +32,7 @@ const schema = Yup.object().shape({
 
 const mapStateToProps = (state: RootState) => ({
     authUser: state.auth,
+    error: state.error.error,
 });
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, any, AnyAction>) => ({
@@ -46,17 +47,17 @@ type LoginPageProps = PropsFromRedux;
 type InferredProps = InferProps<typeof LoginPage.propTypes>;
 
 const LoginPage: React.FC<LoginPageProps> = (props: InferredProps & LoginPageProps) => {
-    const { authenticateUser, authUser } = props;
+    const { authenticateUser, authUser, error } = props;
 
     const { loggedIn } = authUser;
 
     const history = useHistory();
 
-    useEffect(() => {
-        if (loggedIn) {
-            history.push('/');
-        }
-    }, [loggedIn, history]);
+    // useEffect(() => {
+    //     if (loggedIn) {
+    //         history.push('/');
+    //     }
+    // }, [loggedIn, history]);
 
     const classes = useStyles();
 
@@ -121,6 +122,7 @@ const LoginPage: React.FC<LoginPageProps> = (props: InferredProps & LoginPagePro
                                             isInvalid={!!errors.password}
                                             error={errors.password}
                                         />
+                                        {error && <div className={classes.error}>{error}</div>}
                                         <Button
                                             className={classes.submitButton}
                                             type="submit"
